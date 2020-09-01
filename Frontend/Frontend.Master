@@ -1,0 +1,1143 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Frontend.master.cs" Inherits="Frontend.Frontend" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Kênh thông tin bất động sản - Mua bán nhà đất số 1 Việt Nam</title>
+    <link href="assets/css/all.min.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="assets/css/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/style1.css" rel="stylesheet" />
+    <link href="assets/css/style2.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">     
+
+    </asp:ContentPlaceHolder>
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 99999999999; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full widtBh */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: black; /* Fallback color */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;   
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            width:40%;
+            padding: 15px;
+        }
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    <a href='#top' id="gototop">content</a>
+    <form id="form1" method="post" runat="server">
+                    <%-- Đăng nhập --%>
+
+            <div id="myModal1" class="modal">
+            <!-- Modal content -->
+                <div class="modal-content">
+                <span class="close">&times;</span>
+                    <h1 style="color:blue; text-align:center;">ĐĂNG NHẬP</h1>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">User</label>
+                        <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control" placeholder="Email/Tên đăng nhập" />
+                        <asp:RequiredFieldValidator
+                         ID="RequiredFieldValidator1" 
+                         runat="server" 
+                         ControlToValidate="TextBox1"
+                         Display="Dynamic">
+                        </asp:RequiredFieldValidator>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <asp:TextBox ID="TextBox2" runat="server"  CssClass="form-control" placeholder="Mật khẩu" />
+                    </div>
+                    <div class="form-group">
+                      <hr />   
+                    </div>
+              </div>
+            </div>
+            <%-- end Đăng nhập --%>
+
+            <%-- đăng ký --%>
+            <div id="myModal" class="modal" style="display:block !important;z-index:9999;height:1200px; margin:200px">
+            <!-- Modal content -->
+                <div class="modal-content">
+                <span class="close">&times;</span>
+                    <h1 style="color:blue; text-align:center;">ĐĂNG KÝ TÀI KHOẢN</h1>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Họ và tên</label>
+                        <asp:TextBox runat="server" ID="username" CssClass="form-control" placeholder="Họ và tên" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <asp:TextBox ID="email" runat="server"  CssClass="form-control" placeholder="Nhập email" />
+                    </div>
+                    <%--
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <div class="row">
+                          <div class="col">
+                              <asp:TextBox required runat="server" ID="password"  CssClass="form-control" placeholder="Nhập mật khẩu" />
+                          </div>
+                          <div class="col">
+                              <label>Xác nhận mật khẩu</label>
+                              <asp:TextBox runat="server" ID="confirmPass" CssClass="form-control" placeholder="Nhập lại mật khẩu" />
+                          </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <asp:TextBox runat="server" ID="SDT" CssClass="form-control" placeholder="Nhập số điện thoại" />
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <asp:TextBox runat="server" ID="DiaChi" CssClass="form-control" placeholder="Nhập địa chỉ" />
+                    </div>
+                    <div class="form-group">
+                        <label>Căn cước công dân</label>
+                        <asp:TextBox runat="server" ID="CMND" CssClass="form-control" placeholder="Nhập CMND" />
+                    </div>
+                    <div class="form-group">
+                        <label>Chọn ảnh dại diện</label>
+                        <img src="" id="image" width="50px" />
+                        <asp:FileUpload ID="avatar" onchange="Preview();" runat="server" />
+                          <script>
+                              function Preview() {
+                                  var output_1 = document.getElementById('image');
+                                  output_1.src = URL.createObjectURL(event.target.files[0]);
+                                  output_1.onload = function () {
+                                      URL.revokeObjectURL(output_1.src)
+                                  }
+                              };
+                        </script>
+                    </div>
+                      <hr />--%>
+
+                    <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+            </div>
+
+
+            <%-- end đăng ký --%>
+            <header class="full-menu">
+            <div class="homemain">
+               <div class="naga" id="naga">
+                  <a href="javascript:void(0)" id="nav_back" rel="nofollow" title="Danh mục" class="div-panel st-panel fleft">
+                  <span class="img-naga-l">
+                  <img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_caret_left_1.svg" alt="back">
+                  </span>
+                  </a>
+                  <div class="text-center header-logo">
+                     <a href="index.html" title="Nhà đất" rel="nofollow">
+                     <img src="https://staticfile.batdongsan.com.vn/images/newhome/logo_wap1.svg" onerror="this.src='../staticfile.batdongsan.com.vn/images/newhome/logo-wap.png'" class="logo-wap" alt="logo batdongsan.com.vn" title="Batdongsan.com.vn">
+                     </a>
+                  </div>
+                  <a href="javascript:void(0)" id="nav_list" rel="nofollow" title="Danh mục" class="div-panel st-panel fright in">
+                  <span class="img-naga-r">
+                  <img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_hamburger_menu_1.svg" alt="menu">
+                  </span>
+                  </a>
+               </div>
+            </div>
+            <div class="top-search">
+               <div class="homemain home-search">
+                  <div class="search-input-wrap">
+                  </div>
+               </div>
+            </div>
+            <div class="menu-bar pushmenu pushmenu-right">
+               <div class="control-menu">
+                  <div id="divUserStt" class="clearfix">
+                     <div class="join-group">
+                        <span>
+                        <div id="myBtn1">
+                            Đăng nhập
+                        </div>
+                        </span>
+                        <span class="line">|</span>
+                        <span>
+                        <div id="myBtn">
+                            Đăng ký
+                        </div>  
+                        </span>
+                     </div>
+                  </div>
+                  <div id="Header_UserControl_divPostProduct">
+                     <a href="dang-tin-rao-vat-ban-nha-dat.html" id="linkPostProduct" class="btn-border-grey">Đăng tin</a>
+                  </div>
+               </div>
+               <div class="drop-menu">
+                  <div class="left-menu">
+                     <h1>
+                        <a href="index.html" rel="nofollow"><img src="https://staticfile.batdongsan.com.vn/images/Logo/ic_logo_2.svg" ignore-lazy-loading noloaderror="true" onerror="this.src='../staticfile.batdongsan.com.vn/images/icons/ic_logo_2.png'" alt="Kênh thông tin mua bán, cho thuê nhà đất số 1" title="Batdongsan.com.vn"></a>
+                        <span class="visual-hidden">Batdongsan.com.vn</span>
+                     </h1>
+                  </div>
+                  <div class="right-menu">
+                     <!--Header menu-->
+                     <div class="home-header-menu">
+                        <ul class='dropdown-navigative-menu'>
+                           <li class="lv0 tablet"><a href="index.html"><span class="icon"><img src="../file4.batdongsan.com.vn/images/Icons/ic_house.png"></span><span class="text">Trang chủ</span></a></li>
+                           <li class='lv0'>
+                              <a href='nha-dat-ban.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_for_sale.svg"></span><span class="text">Nhà đất bán</span></a>
+                              <ul>
+                                 <li class='lv1'><a href='ban-can-ho-chung-cu.html' class='haslink '>Bán căn hộ chung cư</a></li>
+                                 <li class='lv1'><a href='ban-nha-rieng.html' class='haslink '>Bán nhà riêng</a></li>
+                                 <li class='lv1'><a href='ban-nha-biet-thu-lien-ke.html' class='haslink '>Bán nhà biệt thự, liền kề</a></li>
+                                 <li class='lv1'><a href='ban-nha-mat-pho.html' class='haslink '>Bán nhà mặt phố</a></li>
+                                 <li class='lv1'><a href='ban-dat-nen-du-an.html' class='haslink '>Bán đất nền dự án</a></li>
+                                 <li class='lv1'><a href='ban-dat.html' class='haslink '>Bán đất</a></li>
+                                 <li class='lv1'><a href='ban-trang-trai-khu-nghi-duong.html' class='haslink '>Bán trang trại, khu nghỉ dưỡng</a></li>
+                                 <li class='lv1'><a href='ban-kho-nha-xuong.html' class='haslink '>Bán kho, nhà xưởng</a></li>
+                                 <li class='lv1'><a href='ban-loai-bat-dong-san-khac.html' class='haslink '>Bán loại bất động sản khác</a></li>
+                              </ul>
+                           </li>
+                           <li class='lv0'>
+                              <a href='nha-dat-cho-thue.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_for_rent.svg"></span><span class="text">Nhà đất cho thuê</span></a>
+                              <ul>
+                                 <li class='lv1'><a href='cho-thue-can-ho-chung-cu.html' class='haslink '>Cho thuê căn hộ chung cư</a></li>
+                                 <li class='lv1'><a href='cho-thue-nha-rieng.html' class='haslink '>Cho thuê nhà riêng</a></li>
+                                 <li class='lv1'><a href='cho-thue-nha-mat-pho.html' class='haslink '>Cho thuê nhà mặt phố</a></li>
+                                 <li class='lv1'><a href='cho-thue-nha-tro-phong-tro.html' class='haslink '>Cho thuê nhà trọ, phòng trọ</a></li>
+                                 <li class='lv1'><a href='cho-thue-van-phong.html' class='haslink '>Cho thuê văn phòng</a></li>
+                                 <li class='lv1'><a href='cho-thue-cua-hang-ki-ot.html' class='haslink '>Cho thuê cửa hàng - ki ốt</a></li>
+                                 <li class='lv1'><a href='cho-thue-kho-nha-xuong-dat.html' class='haslink '>Cho thuê kho, nhà xưởng, đất</a></li>
+                                 <li class='lv1'><a href='cho-thue-loai-bat-dong-san-khac.html' class='haslink '>Cho thuê loại bất động sản khác</a></li>
+                              </ul>
+                           </li>
+                           <li class='lv0'>
+                              <a href='du-an-bat-dong-san.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_project.svg"></span><span class="text">Dự án</span></a>
+                              <ul>
+                                 <li class='lv1'><a href='can-ho-chung-cu.html' class='haslink '>Căn hộ, Chung cư</a></li>
+                                 <li class='lv1'><a href='cao-oc-van-phong.html' class='haslink '>Cao ốc văn phòng</a></li>
+                                 <li class='lv1'><a href='trung-tam-thuong-mai.html' class='haslink '>Trung tâm thương mại</a></li>
+                                 <li class='lv1'><a href='khu-do-thi-moi.html' class='haslink '>Khu đô thị mới</a></li>
+                                 <li class='lv1'><a href='khu-phuc-hop.html' class='haslink '>Khu phức hợp</a></li>
+                                 <li class='lv1'><a href='nha-o-xa-hoi.html' class='haslink '>Nhà ở xã hội</a></li>
+                                 <li class='lv1'><a href='khu-nghi-duong-sinh-thai.html' class='haslink '>Khu nghỉ dưỡng, Sinh thái</a></li>
+                                 <li class='lv1'><a href='khu-cong-nghiep.html' class='haslink '>Khu công nghiệp</a></li>
+                                 <li class='lv1'><a href='du-an-khac.html' class='haslink '>Dự án khác</a></li>
+                                 <li class='lv1'><a href='biet-thu-lien-ke.html' class='haslink '>Biệt thự, liền kề</a></li>
+                              </ul>
+                           </li>
+                           <li class='lv0'>
+                              <a href='can-mua-can-thue.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_buy_rent.svg"></span><span class="text">Cần mua - Cần thuê</span></a>
+                              <ul>
+                                 <li class='lv1'>
+                                    <a href='nha-dat-can-mua.html' class='haslink indent'>Nhà đất cần mua</a>
+                                    <ul>
+                                       <li class='lv2'><a href='mua-can-ho-chung-cu.html' class='haslink '>Mua căn hộ chung cư</a></li>
+                                       <li class='lv2'><a href='mua-nha-rieng.html' class='haslink '>Mua nhà riêng</a></li>
+                                       <li class='lv2'><a href='mua-nha-biet-thu-lien-ke.html' class='haslink '>Mua nhà biệt thự, liền kề</a></li>
+                                       <li class='lv2'><a href='mua-nha-mat-pho.html' class='haslink '>Mua nhà mặt phố</a></li>
+                                       <li class='lv2'><a href='mua-dat-nen-du-an.html' class='haslink '>Mua đất nền dự án</a></li>
+                                       <li class='lv2'><a href='mua-dat.html' class='haslink '>Mua đất</a></li>
+                                       <li class='lv2'><a href='mua-trang-trai-khu-nghi-duong.html' class='haslink '>Mua trang trại, khu nghỉ dưỡng</a></li>
+                                       <li class='lv2'><a href='mua-kho-nha-xuong.html' class='haslink '>Mua kho, nhà xưởng</a></li>
+                                       <li class='lv2'><a href='mua-cac-loai-bat-dong-san-khac.html' class='haslink '>Mua loại bất động sản khác</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class='lv1'>
+                                    <a href='nha-dat-can-thue.html' class='haslink indent'>Nhà đất cần thuê</a>
+                                    <ul>
+                                       <li class='lv2'><a href='can-thue-can-ho-chung-cu.html' class='haslink '>Cần thuê căn hộ chung cư</a></li>
+                                       <li class='lv2'><a href='can-thue-nha-rieng.html' class='haslink '>Cần thuê nhà riêng</a></li>
+                                       <li class='lv2'><a href='can-thue-nha-mat-pho.html' class='haslink '>Cần thuê nhà mặt phố</a></li>
+                                       <li class='lv2'><a href='can-thue-nha-tro-phong-tro.html' class='haslink '>Cần thuê nhà trọ, phòng trọ</a></li>
+                                       <li class='lv2'><a href='can-thue-van-phong.html' class='haslink '>Cần thuê văn phòng</a></li>
+                                       <li class='lv2'><a href='can-thue-cua-hang-ki-ot.html' class='haslink '>Cần thuê cửa hàng - ki ốt</a></li>
+                                       <li class='lv2'><a href='can-thue-kho-nha-xuong-dat.html' class='haslink '>Cần thuê kho, nhà xưởng, đất</a></li>
+                                       <li class='lv2'><a href='can-thue-loai-bat-dong-san-khac.html' class='haslink '>Cần thuê loại bất động sản khác</a></li>
+                                    </ul>
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class='lv0'>
+                               <asp:HyperLink NavigateUrl="TinTuc.aspx" runat="server" >
+                                   <span class="icon">
+                                      <img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_news.svg">
+                                  </span>
+                                  <span class="text">Tin tức</span>
+                               </asp:HyperLink>
+                              <ul>
+                                 <li class='lv1'><a href='Covid-19.html' class='haslink '>BĐS & Covid-19</a></li>
+                                 <li class='lv1'><a href='tin-thi-truong.html' class='haslink '>Tin thị trường</a></li>
+                                 <li class='lv1'><a href='interaktivestory.html' class='haslink '>Interaktive Story</a></li>
+                                 <li class='lv1'><a href='phan-tich-nhan-dinh.html' class='haslink '>Phân tích - nhận định</a></li>
+                                 <li class='lv1'><a href='chinh-sach-quan-ly.html' class='haslink '>Chính sách - Quản lý</a></li>
+                                 <li class='lv1'><a href='thong-tin-quy-hoach.html' class='haslink '>Thông tin quy hoạch</a></li>
+                                 <li class='lv1'><a href='bat-dong-san-the-gioi.html' class='haslink '>Bất động sản thế giới</a></li>
+                                 <li class='lv1'><a href='tai-chinh-chung-khoan-bat-dong-san.html' class='haslink '>Tài chính - Chứng khoán - BĐS</a></li>
+                                 <li class='lv1'>
+                                    <a href='tu-van-luat-bat-dong-san.html' class='haslink indent'>Tư vấn luật</a>
+                                    <ul>
+                                       <li class='lv2'><a href='trinh-tu-thu-tuc.html' class='haslink '> Trình tự, thủ tục</a></li>
+                                       <li class='lv2'><a href='quyen-so-huu.html' class='haslink '>Quyền sở hữu</a></li>
+                                       <li class='lv2'><a href='tranh-chap.html' class='haslink '>Tranh chấp</a></li>
+                                       <li class='lv2'><a href='xay-dung-hoan-cong.html' class='haslink '>Xây dựng - Hoàn công</a></li>
+                                       <li class='lv2'><a href='nghia-vu-tai-chinh.html' class='haslink '>Nghĩa vụ tài chính</a></li>
+                                       <li class='lv2'><a href='cac-van-de-co-yeu-to-nuoc-ngoai.html' class='haslink '>Các vấn đề có yếu tố nước ngoài</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class='lv1'>
+                                    <a href='loi-khuyen.html' class='haslink indent'>Lời khuyên</a>
+                                    <ul>
+                                       <li class='lv2'><a href='loi-khuyen-cho-nguoi-mua.html' class='haslink '>Lời khuyên cho người mua</a></li>
+                                       <li class='lv2'><a href='loi-khuyen-cho-nguoi-ban.html' class='haslink '>Lời khuyên cho người bán</a></li>
+                                       <li class='lv2'><a href='loi-khuyen-cho-nha-dau-tu.html' class='haslink '>Lời khuyên cho nhà đầu tư</a></li>
+                                       <li class='lv2'><a href='loi-khuyen-cho-nguoi-thue.html' class='haslink '>Lời khuyên cho người thuê</a></li>
+                                       <li class='lv2'><a href='loi-khuyen-cho-nguoi-cho-thue.html' class='haslink '>Lời khuyên cho người cho thuê</a></li>
+                                    </ul>
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class='lv0'>
+                              <a href='noi-ngoai-that.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_interior.svg"></span><span class="text">Nội - Ngoại thất</span></a>
+                              <ul>
+                                 <li class='lv1'>
+                                    <a href='noi-that.html' class='haslink indent'>Nội thất</a>
+                                    <ul>
+                                       <li class='lv2'><a href='toan-canh-ngoi-nha.html' class='haslink '>Toàn cảnh ngôi nhà</a></li>
+                                       <li class='lv2'><a href='phong-khach.html' class='haslink '>Phòng khách</a></li>
+                                       <li class='lv2'><a href='phong-ngu.html' class='haslink '>Phòng ngủ</a></li>
+                                       <li class='lv2'><a href='phong-bep.html' class='haslink '>Phòng bếp</a></li>
+                                       <li class='lv2'><a href='phong-tam.html' class='haslink '>Phòng tắm</a></li>
+                                       <li class='lv2'><a href='phong-tre-em.html' class='haslink '>Phòng trẻ em</a></li>
+                                       <li class='lv2'><a href='noi-that-van-phong.html' class='haslink '>Nội thất văn phòng</a></li>
+                                       <li class='lv2'><a href='khach-san-nha-hang-showroom.html' class='haslink '>Khách sạn, Nhà hàng, Showroom</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class='lv1'><a href='ngoai-that.html' class='haslink '>Ngoại thất</a></li>
+                                 <li class='lv1'>
+                                    <a href='xay-dung.html' class='haslink indent'>Xây dựng</a>
+                                    <ul>
+                                       <li class='lv2'><a href='vat-lieu-xay-dung.html' class='haslink '>Vật liệu xây dựng</a></li>
+                                       <li class='lv2'><a href='kien-thuc-xay-dung.html' class='haslink '>Kiến thức xây dựng</a></li>
+                                       <li class='lv2'><a href='giai-phap-xay-dung.html' class='haslink '>Giải pháp xây dựng</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class='lv1'>
+                                    <a href='kien-truc.html' class='haslink indent'>Kiến trúc</a>
+                                    <ul>
+                                       <li class='lv2'><a href='tu-van-thiet-ke.html' class='haslink '>Tư vấn thiết kế</a></li>
+                                       <li class='lv2'><a href='kien-truc-xua-va-nay.html' class='haslink '>Kiến trúc xưa và nay</a></li>
+                                       <li class='lv2'><a href='the-gioi-kien-truc.html' class='haslink '>Thế giới kiến trúc</a></li>
+                                       <li class='lv2'><a href='nha-dep.html' class='haslink '>Nhà đẹp</a></li>
+                                       <li class='lv2'>
+                                          <a href='thu-vien-mau-nha.html' class='haslink indent'>Thư viện mẫu nhà</a>
+                                          <ul>
+                                             <li class='lv3'><a href='nha-pho.html' class='haslink '>Nhà phố</a></li>
+                                             <li class='lv3'><a href='biet-thu.html' class='haslink '>Biệt thự</a></li>
+                                             <li class='lv3'><a href='chung-cu.html' class='haslink '>Chung cư</a></li>
+                                             <li class='lv3'><a href='van-phong.html' class='haslink '>Văn phòng</a></li>
+                                          </ul>
+                                       </li>
+                                    </ul>
+                                 </li>
+                                 <li class='lv1'><a href='tu-van-noi-ngoai-that.html' class='haslink '>Tư vấn nội ngoại thất</a></li>
+                                 <li class='lv1'><a href='mach-ban.html' class='haslink '>Mách bạn</a></li>
+                                 <li class='lv1'><a href='mua-sam.html' class='haslink '>Mua sắm</a></li>
+                              </ul>
+                           </li>
+                           <li class='lv0'>
+                              <a href='phong-thuy.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_feng_shui.svg"></span><span class="text">Phong thủy</span></a>
+                              <ul>
+                                 <li class='lv1'><a href='phong-thuy-toan-canh.html' class='haslink '>Phong thủy toàn cảnh</a></li>
+                                 <li class='lv1'><a href='tu-van-phong-thuy.html' class='haslink '>Tư vấn phong thủy</a></li>
+                                 <li class='lv1'>
+                                    <a href='phong-thuy-nha-o.html' class='haslink indent'>Phong thủy nhà ở</a>
+                                    <ul>
+                                       <li class='lv2'><a href='phong-thuy-phong-ngu.html' class='haslink '>Phong thủy phòng ngủ</a></li>
+                                       <li class='lv2'><a href='phong-thuy-phong-khach.html' class='haslink '>Phong thủy phòng khách</a></li>
+                                       <li class='lv2'><a href='phong-thuy-phong-bep.html' class='haslink '>Phong thủy phòng bếp</a></li>
+                                       <li class='lv2'><a href='phong-thuy-phong-tam.html' class='haslink '>Phong thủy phòng tắm</a></li>
+                                       <li class='lv2'><a href='phong-thuy-cua-chinh-san-vuon.html' class='haslink '>Phong thủy cửa chính, sân vườn</a></li>
+                                    </ul>
+                                 </li>
+                                 <li class='lv1'><a href='phong-thuy-van-phong.html' class='haslink '>Phong thủy văn phòng</a></li>
+                                 <li class='lv1'><a href='tin-tuc-phong-thuy-theo-tuoi.html' class='haslink '>Phong thủy theo tuổi</a></li>
+                              </ul>
+                           </li>
+                           <li class='lv0'>
+                              <a href='javascript:;' class='nolink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_contact_list.svg"></span><span class="text">Danh bạ</span></a>
+                              <ul>
+                                 <li class='lv1'><a href='nha-moi-gioi.html' class='haslink '>Nhà môi giới</a></li>
+                                 <li class='lv1'>
+                                    <a href='doanh-nghiep.html' class='haslink '>Doanh nghiệp</a>
+                                    <ul></ul>
+                                 </li>
+                              </ul>
+                           </li>
+                           <li class="lv0 bg_menu zompchat"><a href="javascript:void(0);" rel="nofollow" title="Trò chuyện với chúng tôi">Trò chuyện với chúng tôi</a></li>
+                        </ul>
+                        <div class="header-logout hidden"><a href="javascript:void(0);" onclick="LogOut()" rel="nofollow">Đăng xuất</a></div>
+                     </div>
+                  </div>
+                  <div class="clear">&nbsp;</div>
+               </div>
+            </div>
+            <div class="bg-pushmenu"></div>
+         </header>
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                
+                </asp:ContentPlaceHolder>
+            </div>
+            <footer>
+                <div class="home-small">
+                   <div class="footer-row">
+                      <div class="footer-col1">
+                         <div class="footer-logo">
+                            <a href="index.html">
+                            <img src="https://staticfile.batdongsan.com.vn/images/logo-footer-no1.svg" noloaderror="true" onerror="this.src='../staticfile.batdongsan.com.vn/images/logo-footer-no1.png'">
+                            </a>
+                         </div>
+                         <div class="footer-company-name center">
+                            Công ty Cổ phần PropertyGuru Việt Nam
+                            <a href="https://www.propertygurugroup.com/" target="_blank" rel="nofollow">Một thành viên của tập đoàn PropertyGuru</a>
+                         </div>
+                         <div class="footer-add">
+                            <span>
+                            <img src="../file4.batdongsan.com.vn/images/newhome/placeholder-line.png">
+                            </span>Tầng 31, Keangnam Hanoi Landmark, Phạm Hùng, Nam Từ Liêm, Hà Nội
+                         </div>
+                         <div class="footer-add">
+                            <span>
+                            <img src="../file4.batdongsan.com.vn/images/newhome/phone-call.png">
+                            </span>(024) 3562 5939 - (024) 3562 5940
+                         </div>
+                         <div class="footer-add footer-social">
+                            <a href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=5488" rel="nofollow" target="_blank"><img src="../file4.batdongsan.com.vn/images/newhome/da-dang-ki-bct.png" class="bct" /></a>
+                            <a href="https://www.facebook.com/Batdongsandv" rel="nofollow" target="_blank">
+                            <img src="../file4.batdongsan.com.vn/images/newhome/fb.png" />
+                            </a> <a href="https://www.youtube.com/channel/UCLAgPnJX3b3vff4uBsyufPQ" rel="nofollow" target="_blank">
+                            <img src="../file4.batdongsan.com.vn/images/newhome/youtube.png" />
+                            </a> <a href="http://zalo.me/2606322533378009715" rel="nofollow" target="_blank">
+                            <img src="../file4.batdongsan.com.vn/images/newhome/zalo2.png" />
+                            </a>
+                         </div>
+                      </div>
+                      <div class="footer-col2">
+                         <div class="footer-sub-col1">
+                            <div class="col-header">HƯỚNG DẪN</div>
+                            <div class="col-content">
+                               <ul>
+                                  <li><a href="bao-gia-quang-cao.html" rel="nofollow">Báo giá &amp; hỗ trợ</a></li>
+                                  <li><a href="nhung-cau-hoi-thuong-gap.html" rel="nofollow">Câu hỏi thường gặp</a></li>
+                                  <li><a href="gioi-thieu.html" rel="nofollow">Về chúng tôi</a></li>
+                                  <li><a href="ve-batdongsancomvn.html" rel="nofollow">Tin nội bộ</a></li>
+                                  <li><a href="lien-he.html" rel="nofollow">Liên hệ</a></li>
+                                  <li><a href="trang-sitemap.html" rel="nofollow">Sitemap</a></li>
+                               </ul>
+                            </div>
+                         </div>
+                         <div class="footer-sub-col2">
+                            <div class="col-header">QUY ĐỊNH</div>
+                            <div class="col-content">
+                               <ul>
+                                  <li><a href="quy-dinh-dang-tin.html" rel="nofollow">Quy định đăng tin</a></li>
+                                  <li><a href="quy-dinh-su-dung.html" rel="nofollow">Quy chế hoạt động</a></li>
+                                  <li><a href="dieu-khoan-thoa-thuan.html" rel="nofollow">Điều khoản thỏa thuận</a></li>
+                                  <li><a href="chinh-sach-bao-mat-thong-tin.html" rel="nofollow">Chính sách bảo mật</a></li>
+                                  <li><a href="giai-quyet-khieu-nai.html" rel="nofollow">Giải quyết khiếu nại</a></li>
+                               </ul>
+                            </div>
+                         </div>
+                         <div class="footer-sub-col3">
+                            <div class="col-header">Tổng đài hỗ trợ</div>
+                            <div class="col-content">
+                               <ul>
+                                  <li>
+                                     <span>
+                                     <img src="../file4.batdongsan.com.vn/images/newhome/hotline.png">
+                                     </span>Tổng đài CSKH: 1900 1881
+                                  </li>
+                                  <li>
+                                     <span>
+                                     <img src="../file4.batdongsan.com.vn/images/newhome/email.png">
+                                     </span><a href="mailto:hotro@batdongsan.com.vn">hotro@batdongsan.com.vn</a>
+                                  </li>
+                                  <li>
+                                     <span>
+                                     <img src="../file4.batdongsan.com.vn/images/newhome/icon3x/ic_mailbox1.png" width="16">
+                                     </span><a rel="nofollow" href="mailto:cskh@batdongsan.com.vn">cskh@batdongsan.com.vn</a>
+                                  </li>
+                               </ul>
+                            </div>
+                         </div>
+                         <div class="footer-sub-col4">
+                            <div class="col-header">Quốc gia</div>
+                            <div class="col-content">
+                               <div class="list-international">
+                                  <div>Chọn quốc gia</div>
+                                  <div class="national">
+                                     <div class="vietnam">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/vietnam.png">
+                                        Việt Nam
+                                     </div>
+                                     <ul id="country">
+                                        <li>
+                                           <a target="_blank" href="http://www.rumah.com/" title="Indonesia Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/indonesia.png" alt="Indonesia Real Estate">Indonesia
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.ddproperty.com/" title="Thailand Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/thailand.png" alt="Thailand Real Estate">Thailand
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.homeguru.com.my/" title="Malaysia Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/malaysia.png" alt="Malaysia Real Estate">Malaysia
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.propertyguru.com.sg/" title="Singapore Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/singapore.png" alt="Singapore Real Estate">Singapore
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.28hse.com/en/" title="Hong Kong Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/hongkong.png" alt="Hong Kong">Hong Kong
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.immobiliare.it/" rel="nofollow" title="Italy Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/Italy.png" alt="Italy">Italy
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.luxuryestate.com/" title="Luxury homes">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/italy2.png" alt="Italy">Italy
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.propertyfinder.co.tz/" title="Tanzania Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/tanzania.png" alt="Tanzania Real Estate">Tanzania
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://aqarmap.com/" title="Egypt Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/egypt.png" alt="Egypt Real Estate">Egypt
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://american-european.net/" title="Costa Rica Real Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/costa-rica.png" alt="Costa Rica Real Estate">Costa Rica
+                                           </a>
+                                        </li>
+                                        <li>
+                                           <a target="_blank" href="http://www.malimalihome.net/" title="Macau Estate">
+                                           <img src="../file4.batdongsan.com.vn/images/newhome/international/macau.png" alt="Macau Real Estate">Macau
+                                           </a>
+                                        </li>
+                                     </ul>
+                                  </div>
+                               </div>
+                               <div class="language">
+                                  Chọn ngôn ngữ&nbsp;&nbsp;<a href="english.html">
+                                  <img src="../file4.batdongsan.com.vn/images/newhome/eu.png">
+                                  En
+                                  </a>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="clear"></div>
+                         <div class="footer-sub-col5">
+                            <div class="footer-title">Tải ứng dụng Batdongsan.com.vn</div>
+                            <a href="https://play.google.com/store/apps/details?id=vn.com.batdongsan" class="m-r-15" rel="nofollow" target="_blank">
+                            <img src="../file4.batdongsan.com.vn/images/newhome/google-play.png">
+                            </a>
+                            <a href="https://apps.apple.com/vn/app/batdongsan.com.vn/id866492094" rel="nofollow" target="_blank">
+                            <img src="../file4.batdongsan.com.vn/images/newhome/apple-app-store.png">
+                            </a>
+                         </div>
+                         <div class="footer-sub-col6">
+                            <div id="Footer_NewsletterForm_pnlHomepage">
+                               <div class="footer-title">Đăng kí ngay để nhận thông tin từ Batdongsan.com.vn</div>
+                               <input type="text" id="email-footer" placeholder="Nhập email của bạn">
+                               <a href="javascript:void(0);" id="newsletterRegister-footer" class="newsletter-register">Gửi</a>
+                               <div class="clear">&nbsp;</div>
+                            </div>
+                         </div>
+                         <div class="clear"></div>
+                      </div>
+                      <div class="clear"></div>
+                   </div>
+                   <div class="footer-row list-branch">
+                      <div class="branch-show">Xem tất cả chi nhánh của Batdongsan.com.vn&nbsp;&nbsp;<img src="../file4.batdongsan.com.vn/images/newhome/down-arrow-grey.png" class="downarr"><img src="../file4.batdongsan.com.vn/images/newhome/up-arrow.png" class="uparr hidden"></div>
+                      <div class="branch-detail">
+                         <div class="branch-col">
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh TP. Hồ Chí Minh</div>
+                               <div class="branch-add">
+                                  Tầng 8, Tòa nhà Xổ số Kiến thiết (Lottery Tower), Số 77 Trần Nhân Tôn, Phường 9, Quận 5, TP. Hồ Chí Minh<br>
+                                  Điện thoại: 0904 893 279
+                               </div>
+                            </div>
+                            <div class="branch">
+                               <div class="branch-name">Văn phòng Quận 1 TP. Hồ Chí Minh</div>
+                               <div class="branch-add">
+                                  Lầu 5 Sailing Tower, 111A Pasteur, phường Bến Nghé, Quận 1, TP. Hồ Chí Minh<br>
+                                  Điện thoại: 090 494 6163
+                               </div>
+                            </div>
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh Đà Nẵng</div>
+                               <div class="branch-add">
+                                  Tầng 9, tòa nhà Vĩnh Trung Plaza, số 255 – 257 Hùng Vương, phường Vĩnh Trung, quận Thanh Khê, TP. Đà Nẵng<br>
+                                  Điện thoại: (0236) 3 666 968 - Mobile: 0904 907 279
+                               </div>
+                            </div>
+                         </div>
+                         <div class="branch-col">
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh Nha Trang</div>
+                               <div class="branch-add">
+                                  Tầng 6, Tòa nhà CTCP Điện Lực Khánh Hòa, 11 Lý Thánh Tôn, Phường Vạn Thạnh, TP Nha Trang, Khánh Hòa<br>
+                                  Điện thoại: (0258) 3 818 886 - Mobile: 0902 169 295
+                               </div>
+                            </div>
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh Hải Phòng</div>
+                               <div class="branch-add">
+                                  Phòng 601B, TD Business Center, lô 20A Lê Hồng Phong, quận Ngô Quyền, TP. Hải Phòng<br>
+                                  Điện thoại: (0225) 3 246 848 - Mobile: 0903 456 322
+                               </div>
+                            </div>
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh Cần Thơ</div>
+                               <div class="branch-add">
+                                  Lầu 8, số 8 đường Phan Văn Trị, phường An Phú, quận Ninh Kiều, TP. Cần Thơ<br>
+                                  Điện thoại: (0292) 3 837 838 - Mobile: 0902 229 697
+                               </div>
+                            </div>
+                         </div>
+                         <div class="branch-col">
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh Vũng Tàu</div>
+                               <div class="branch-add">
+                                  Tầng 4, tòa nhà ACB, số 111 Hoàng Hoa Thám, phường 2, TP. Vũng Tàu, tỉnh Bà Rịa - Vũng Tàu<br>
+                                  Điện thoại: (0254) 3 511 339 - Mobile: 0904 509 293
+                               </div>
+                            </div>
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh Bình Dương</div>
+                               <div class="branch-add">
+                                  Phòng 10, tầng 16, Becamex Tower, số 230 Đại lộ Bình Dương, P.Phú Hòa, TP.Thủ Dầu Một, tỉnh Bình Dương<br>
+                                  Điện thoại: (0274) 22 21 201, Mobile: 0919 255 580
+                               </div>
+                            </div>
+                            <div class="branch">
+                               <div class="branch-name">Chi nhánh Đồng Nai</div>
+                               <div class="branch-add">
+                                  Lầu 18, tòa Pegasus, số 53-55 đường Võ Thị Sáu, phường Quyết Thắng, TP. Biên Hoà, tỉnh Đồng Nai<br>
+                                  Điện thoại: 0906 282 428
+                               </div>
+                            </div>
+                         </div>
+                         <div class="clear"></div>
+                      </div>
+                   </div>
+                   <div class="footer-infomation">
+                      <div class="footer-info-col1">
+                         Giấy ĐKKD số 0104630479 do Sở KHĐT TP Hà Nội cấp lần đầu ngày 02/06/2010<br>
+                         Giấy phép ICP số 2399/GP-STTTT do Sở TTTT Hà Nội cấp ngày 04/09/2014<br>
+                         Giấy phép GH ICP số 3832/GP-TTĐT do Sở TTTT Hà Nội cấp ngày 08/08/2019
+                      </div>
+                      <div class="footer-info-col2">
+                         Chịu trách nhiệm nội dung GP ICP: Bà Đặng Thị Hường<br>
+                         Chịu trách nhiệm sàn GDTMĐT: Ông Vũ Triệu Vương<br />(Robert Vuong Trieu Vu)<br />
+                         Quy chế, quy định giao dịch có hiệu lực từ 23/02/2020
+                      </div>
+
+                      <div class="footer-info-col3">
+                         Copyright © 2007 - 2020 Batdongsan.com.vn<br>
+                         Ghi rõ nguồn "Batdongsan.com.vn" khi phát hành lại thông tin từ website này.
+                      </div>
+                      <div class="clear"></div>
+                   </div>
+                </div>
+             </footer>
+        </div>  
+
+        <header class="full-menu">
+        <div class="homemain">
+            <div class="naga" id="naga">
+                <a href="javascript:void(0)" id="nav_back" rel="nofollow" title="Danh mục" class="div-panel st-panel fleft">
+                <span class="img-naga-l">
+                <img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_caret_left_1.svg" alt="back">
+                </span>
+                </a>
+                <div class="text-center header-logo">
+                    <a href="index.html" title="Nhà đất" rel="nofollow">
+                    <img src="https://staticfile.batdongsan.com.vn/images/newhome/logo_wap1.svg" onerror="this.src='../staticfile.batdongsan.com.vn/images/newhome/logo-wap.png'" class="logo-wap" alt="logo batdongsan.com.vn" title="Batdongsan.com.vn">
+                    </a>
+                </div>
+                <a href="javascript:void(0)" id="nav_list" rel="nofollow" title="Danh mục" class="div-panel st-panel fright in">
+                <span class="img-naga-r">
+                <img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_hamburger_menu_1.svg" alt="menu">
+                </span>
+                </a>
+            </div>
+        </div>
+        <div class="top-search">
+            <div class="homemain home-search">
+                <div class="search-input-wrap">
+                </div>
+            </div>
+        </div>
+        <div class="menu-bar pushmenu pushmenu-right">
+            <div class="control-menu">
+                <div id="divUserStt" class="clearfix">
+                    <div class="join-group">
+                    <span>
+                    <a href="#" rel="nofollow" id="kct_login">Đăng nhập</a>
+                    </span>
+                    <span class="line">|</span>
+                    <span>
+                    <div id="myBtn">
+                        Đăng ký
+                    </div>
+                            
+                    </span>
+                    </div>
+                </div>
+                <div id="Header_UserControl_divPostProduct">
+                    <a href="dang-tin-rao-vat-ban-nha-dat.html" id="linkPostProduct" class="btn-border-grey">Đăng tin</a>
+                </div>
+            </div>
+            <div class="drop-menu">
+                <div class="left-menu">
+                    <h1>
+                    <a href="index.html" rel="nofollow"><img src="https://staticfile.batdongsan.com.vn/images/Logo/ic_logo_2.svg" ignore-lazy-loading noloaderror="true" onerror="this.src='../staticfile.batdongsan.com.vn/images/icons/ic_logo_2.png'" alt="Kênh thông tin mua bán, cho thuê nhà đất số 1" title="Batdongsan.com.vn"></a>
+                    <span class="visual-hidden">Batdongsan.com.vn</span>
+                    </h1>
+                </div>
+                <div>
+                    <!--Header menu-->
+                    <div class="home-header-menu">
+                    <ul class='dropdown-navigative-menu' style="height: 38px">
+                        <li class="lv0 tablet"><a href="index.html"><span class="icon"><img src="../file4.batdongsan.com.vn/images/Icons/ic_house.png"></span><span class="text">Trang chủ</span></a></li>
+                        <li class='lv0'>
+                            <a href='nha-dat-ban.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_for_sale.svg"></span><span class="text">Nhà đất bán</span></a>
+                            <ul>
+                                <li class='lv1'><a href='ban-can-ho-chung-cu.html' class='haslink '>Bán căn hộ chung cư</a></li>
+                                <li class='lv1'><a href='ban-nha-rieng.html' class='haslink '>Bán nhà riêng</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class='lv0'>
+                            <a href='nha-dat-cho-thue.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_for_rent.svg"></span><span class="text">Nhà đất cho thuê</span></a>
+                            <ul>
+                                <li class='lv1'><a href='cho-thue-can-ho-chung-cu.html' class='haslink '>Cho thuê căn hộ chung cư</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class='lv0'>
+                            <a href='du-an-bat-dong-san.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_project.svg"></span><span class="text">Dự án</span></a>
+                            <ul>
+                                <li class='lv1'><a href='can-ho-chung-cu.html' class='haslink '>Căn hộ, Chung cư</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class='lv0'>
+                            <a href='can-mua-can-thue.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_buy_rent.svg"></span><span class="text">Cần mua - Cần thuê</span></a>
+                            <ul>
+                                <li class='lv1'>
+                                <a href='nha-dat-can-mua.html' class='haslink indent'>Nhà đất cần mua</a>
+                                <ul>
+                                    <li class='lv2'><a href='mua-can-ho-chung-cu.html' class='haslink '>Mua căn hộ chung cư</a></li>
+                                    
+                                </ul>
+                                </li>
+                                <li class='lv1'>
+                                <a href='nha-dat-can-thue.html' class='haslink indent'>Nhà đất cần thuê</a>
+                                <ul>
+                                    <li class='lv2'><a href='can-thue-can-ho-chung-cu.html' class='haslink '>Cần thuê căn hộ chung cư</a></li>
+                                    
+                                </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class='lv0'>
+                            <asp:HyperLink NavigateUrl="TinTuc.aspx" runat="server" >
+                                <span class="icon">
+                                    <img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_news.svg">
+                                </span>
+                                <span class="text">Tin tức</span>
+                            </asp:HyperLink>
+                            <ul>
+                                <asp:Repeater ID="listCateNews" runat="server" OnItemCommand="listCateNews_ItemCommand">
+                                    <ItemTemplate>
+                                        <li class='lv1'>
+                                            <asp:LinkButton ID="cateNews" class='haslink ' CommandArgument='<%# Eval("Id_DanhMucTinTuc") %>' runat="server">
+                                                <%#Eval("TenDmTinTuc") %>
+                                            </asp:LinkButton>
+
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                
+                                
+                            </ul>
+                        </li>
+                        <li class='lv0'>
+                            <a href='noi-ngoai-that.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_interior.svg"></span><span class="text">Nội - Ngoại thất</span></a>
+                            <ul>
+                                <li class='lv1'>
+                                <a href='noi-that.html' class='haslink indent'>Nội thất</a>
+                                
+                                </li>
+                                <li class='lv1'><a href='ngoai-that.html' class='haslink '>Ngoại thất</a></li>
+                                
+                                    
+                            </ul>
+                        </li>
+                        <li class='lv0'>
+                            <a href='phong-thuy.html' class='haslink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_feng_shui.svg"></span><span class="text">Phong thủy</span></a>
+                            <ul>
+                                <li class='lv1'><a href='phong-thuy-toan-canh.html' class='haslink '>Phong thủy toàn cảnh</a></li>
+                                
+                           
+                            </ul>
+                        </li>
+                        <li class='lv0'>
+                            <a href='javascript:;' class='nolink '><span class="icon"><img src="https://staticfile.batdongsan.com.vn/images/mobile/ic_contact_list.svg"></span><span class="text">Danh bạ</span></a>
+                            <ul>
+                                <li class='lv1'><a href='nha-moi-gioi.html' class='haslink '>Nhà môi giới</a></li>
+                                <li class='lv1'>
+                                <a href='doanh-nghiep.html' class='haslink '>Doanh nghiệp</a>
+                                <ul></ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="lv0 bg_menu zompchat"><a href="javascript:void(0);" rel="nofollow" title="Trò chuyện với chúng tôi">Trò chuyện với chúng tôi</a></li>
+                    </ul>
+                    <div class="header-logout hidden"><a href="javascript:void(0);" onclick="LogOut()" rel="nofollow">Đăng xuất</a></div>
+                    </div>
+                </div>
+                <div class="clear">&nbsp;</div>
+            </div>
+        </div>
+        <div class="bg-pushmenu"></div>
+        </header>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                
+        </asp:ContentPlaceHolder>
+
+        <footer>
+            <div class="home-small">
+                <div class="footer-row">
+                    <div class="footer-col1">
+                        <div class="footer-logo">
+                        <a href="index.html">
+                        <img src="https://staticfile.batdongsan.com.vn/images/logo-footer-no1.svg" noloaderror="true" onerror="this.src='../staticfile.batdongsan.com.vn/images/logo-footer-no1.png'">
+                        </a>
+                        </div>
+                        <div class="footer-company-name center">
+                        Công ty Cổ phần PropertyGuru Việt Nam
+                        <a href="https://www.propertygurugroup.com/" target="_blank" rel="nofollow">Một thành viên của tập đoàn PropertyGuru</a>
+                        </div>
+                        <div class="footer-add">
+                        <span>
+                            <img src="assets/images/placeholder-line.png" />
+                        </span>Tầng 31, Keangnam Hanoi Landmark, Phạm Hùng, Nam Từ Liêm, Hà Nội
+                        </div>
+                        <div class="footer-add">
+                        <span>
+                            <img src="assets/images/phone-call.png" />
+                        </span>(024) 3562 5939 - (024) 3562 5940
+                        </div>
+                        <div class="footer-add footer-social">
+                        <a href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=5488" rel="nofollow" target="_blank">
+                            <img src="assets/images/da-dang-ki-bct.png" />
+                        </a>
+                        <a href="https://www.facebook.com/Batdongsandv" rel="nofollow" target="_blank">
+                            <img src="assets/images/fb.png" />
+                        </a> <a href="https://www.youtube.com/channel/UCLAgPnJX3b3vff4uBsyufPQ" rel="nofollow" target="_blank">
+                            <img src="assets/images/youtube.png" />
+                        </a> <a href="http://zalo.me/2606322533378009715" rel="nofollow" target="_blank">
+                            <img src="assets/images/zalo2.png" />
+                        </a>
+                        </div>
+                    </div>
+                    <div class="footer-col2">
+                        <div class="footer-sub-col1">
+                        <div class="col-header">HƯỚNG DẪN</div>
+                        <div class="col-content">
+                            <ul>
+                                <li><a href="bao-gia-quang-cao.html" rel="nofollow">Báo giá &amp; hỗ trợ</a></li>
+                                <li><a href="nhung-cau-hoi-thuong-gap.html" rel="nofollow">Câu hỏi thường gặp</a></li>
+                                <li><a href="gioi-thieu.html" rel="nofollow">Về chúng tôi</a></li>
+                                <li><a href="ve-batdongsancomvn.html" rel="nofollow">Tin nội bộ</a></li>
+                                <li><a href="lien-he.html" rel="nofollow">Liên hệ</a></li>
+                                <li><a href="trang-sitemap.html" rel="nofollow">Sitemap</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="footer-sub-col2">
+                        <div class="col-header">QUY ĐỊNH</div>
+                        <div class="col-content">
+                            <ul>
+                                <li><a href="quy-dinh-dang-tin.html" rel="nofollow">Quy định đăng tin</a></li>
+                                <li><a href="quy-dinh-su-dung.html" rel="nofollow">Quy chế hoạt động</a></li>
+                                <li><a href="dieu-khoan-thoa-thuan.html" rel="nofollow">Điều khoản thỏa thuận</a></li>
+                                <li><a href="chinh-sach-bao-mat-thong-tin.html" rel="nofollow">Chính sách bảo mật</a></li>
+                                <li><a href="giai-quyet-khieu-nai.html" rel="nofollow">Giải quyết khiếu nại</a></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="footer-sub-col3">
+                        <div class="col-header">Tổng đài hỗ trợ</div>
+                        <div class="col-content">
+                            <ul>
+                                <li>
+                                    <span>
+                                        <img src="assets/images/hotline.png" />
+                                    </span>Tổng đài CSKH: 1900 1881
+                                </li>
+                                <li>
+                                    <span>
+                                        <img src="assets/images/email.png" />
+                                    </span><a href="mailto:hotro@batdongsan.com.vn">hotro@batdongsan.com.vn</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        <img src="assets/images/ic_mailbox1.png" width="16px" />
+                                    </span><a rel="nofollow" href="mailto:cskh@batdongsan.com.vn">cskh@batdongsan.com.vn</a>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="footer-sub-col4">
+                        <div class="col-header">Quốc gia</div>
+                        <div class="col-content">
+                            <div class="list-international">
+                                <div>Chọn quốc gia</div>
+                                <div class="national">
+                                    <div class="vietnam">
+                                        <img src="assets/images/vietnam.png" />
+                                    Việt Nam
+                                    </div>
+                                    <ul id="country">
+                                    <li>
+                                        <a target="_blank" href="http://www.rumah.com/" title="Indonesia Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/indonesia.png" alt="Indonesia Real Estate">Indonesia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.ddproperty.com/" title="Thailand Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/thailand.png" alt="Thailand Real Estate">Thailand
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.homeguru.com.my/" title="Malaysia Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/malaysia.png" alt="Malaysia Real Estate">Malaysia
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.propertyguru.com.sg/" title="Singapore Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/singapore.png" alt="Singapore Real Estate">Singapore
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.28hse.com/en/" title="Hong Kong Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/hongkong.png" alt="Hong Kong">Hong Kong
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.immobiliare.it/" rel="nofollow" title="Italy Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/Italy.png" alt="Italy">Italy
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.luxuryestate.com/" title="Luxury homes">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/italy2.png" alt="Italy">Italy
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.propertyfinder.co.tz/" title="Tanzania Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/tanzania.png" alt="Tanzania Real Estate">Tanzania
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://aqarmap.com/" title="Egypt Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/egypt.png" alt="Egypt Real Estate">Egypt
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://american-european.net/" title="Costa Rica Real Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/costa-rica.png" alt="Costa Rica Real Estate">Costa Rica
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a target="_blank" href="http://www.malimalihome.net/" title="Macau Estate">
+                                        <img src="../file4.batdongsan.com.vn/images/newhome/international/macau.png" alt="Macau Real Estate">Macau
+                                        </a>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="language">
+                                Chọn ngôn ngữ&nbsp;&nbsp;<a href="english.html">
+                                <img src="../file4.batdongsan.com.vn/images/newhome/eu.png">
+                                En
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="footer-sub-col5">
+                        <div class="footer-title">Tải ứng dụng Batdongsan.com.vn</div>
+                        <a href="https://play.google.com/store/apps/details?id=vn.com.batdongsan" class="m-r-15" rel="nofollow" target="_blank">
+                            <img src="assets/images/google-play.png" />
+                        </a>
+                        <a href="https://apps.apple.com/vn/app/batdongsan.com.vn/id866492094" rel="nofollow" target="_blank">
+                            <img src="assets/images/apple-app-store.png" />
+                        </a>
+                        </div>
+                        <div class="footer-sub-col6">
+                        <div id="Footer_NewsletterForm_pnlHomepage">
+                            <div class="footer-title">Đăng kí ngay để nhận thông tin từ Batdongsan.com.vn</div>
+                            <input type="text" id="email-footer" placeholder="Nhập email của bạn">
+                            <a href="javascript:void(0);" id="newsletterRegister-footer" class="newsletter-register">Gửi</a>
+                            <div class="clear">&nbsp;</div>
+                        </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="footer-infomation">
+                    <div class="footer-info-col1">
+                        Giấy ĐKKD số 0104630479 do Sở KHĐT TP Hà Nội cấp lần đầu ngày 02/06/2010<br>
+                        Giấy phép ICP số 2399/GP-STTTT do Sở TTTT Hà Nội cấp ngày 04/09/2014<br>
+                        Giấy phép GH ICP số 3832/GP-TTĐT do Sở TTTT Hà Nội cấp ngày 08/08/2019
+                    </div>
+                    <div class="footer-info-col2">
+                        Chịu trách nhiệm nội dung GP ICP: Bà Đặng Thị Hường<br>
+                        Chịu trách nhiệm sàn GDTMĐT: Ông Vũ Triệu Vương<br />(Robert Vuong Trieu Vu)<br />
+                        Quy chế, quy định giao dịch có hiệu lực từ 23/02/2020
+                    </div>
+
+                    <div class="footer-info-col3">
+                        Copyright © 2007 - 2020 Batdongsan.com.vn<br>
+                        Ghi rõ nguồn "Batdongsan.com.vn" khi phát hành lại thông tin từ website này.
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            </footer>     
+        <div id="gototop" title="Go to top" style="display: block;">
+            <button id="backtotop" title="Go to top" class="btn"></button>
+        </div>
+      <script src="assets/js/jquery.js"></script>
+      <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="assets/js/jquery.bootstrap-growl.min.js"></script>
+      <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+      <script type="text/javascript" src="assets/js/js.js"></script>
+         <script>
+             var modal = document.getElementById("myModal");
+
+             // Get the button that opens the modal
+             var btn = document.getElementById("myBtn");
+
+             // Get the <span> element that closes the modal
+             var span = document.getElementsByClassName("close")[1];
+
+             // When the user clicks the button, open the modal 
+             btn.onclick = function () {
+                 modal.style.display = "block";
+             }
+             // When the user clicks on <span> (x), close the moda
+             span.onclick = function () {
+                 modal.style.display = "none";
+             }
+
+             // When the user clicks anywhere outside of the modal, close it
+             window.onclick = function (event) {
+                 if (event.target == modal) {
+                     modal.style.display = "none";
+                 }
+             }
+        </script>
+        <%--  chịu --%>
+        <script>
+            var modal1 = document.getElementById("myModal1");
+
+
+            // Get the button that opens the modal
+            var btn1 = document.getElementById("myBtn1");
+
+            // Get the <span> element that closes the modal
+            var span1 = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal 
+            btn1.onclick = function () {
+                modal1.style.display = "block";
+
+            }
+            // When the user clicks on <span> (x), close the modal
+            span1.onclick = function () {
+                modal1.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal1) {
+                    modal1.style.display = "none";
+                }
+            }
+        </script>
+        <script>
+            //Khi người dùng cuộn chuột thì gọi hàm scrollFunction
+            window.onscroll = function () { scrollFunction() };
+            // khai báo hàm scrollFunction
+            function scrollFunction() {
+                // Kiểm tra vị trí hiện tại của con trỏ so với nội dung trang
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    //nếu lớn hơn 20px thì hiện button
+                    document.getElementById("backtotop").style.display = "block";
+                } else {
+                    //nếu nhỏ hơn 20px thì ẩn button
+                    document.getElementById("backtotop").style.display = "none";
+                }
+            }
+            //gán sự kiện click cho button
+            document.getElementById('backtotop').addEventListener("click", function () {
+                //Nếu button được click thì nhảy về đầu trang
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            });
+    </script>
+    </form>
+</body>
+</html>
